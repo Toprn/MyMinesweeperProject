@@ -72,15 +72,20 @@ class Main(object):
 
     def pressed(self,height,width):
         try:
-            if int(height) not in range(10,51) or int(width) not in range(10,51):
-                self.label_3.setText("Please enter\nnumber 10-50")
-            elif int(height) in range(10,51) and int(width) in range(10,51):
-                self.height = int(height)
-                self.width = int(width)
-                thisMainWindow.hide()
-                GameWindow.show()
+            if int(height) not in range(10,51) and int(width) not in range(10,51):
+                self.label_3.setText("Please enter a\nheight and width\nin range of 10-50")
+            elif int(height) not in range(10,51):
+                self.label_3.setText("Please enter a height\nby number 10-50")
+            elif int(width) not in range(10,51):
+                self.label_3.setText("Please enter a width\nby number 10-50")
+            elif int(height) in range(10,51):
+                if int(width) in range(10,51):
+                    game = MainWindow(int(height),int(width))
+                    game.setupUi(GameWindow)
+                    thisMainWindow.hide()
+                    GameWindow.show()
         except:
-            self.label_3.setText("Alphabets\naren't allow")
+            self.label_3.setText("Please enter a\nheight and width\nin range of 10-50")
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -88,16 +93,16 @@ class Main(object):
         self.pushButton.setText(_translate("MainWindow", "Play now"))
         self.label.setText(_translate("MainWindow", "Height"))
         self.label_2.setText(_translate("MainWindow", "Width"))
-        self.label_3.setText(_translate("MainWindow", ""))
+        self.label_3.setText(_translate("MainWindow", "Please enter a\nheight and width\nin range of 10-50"))
 
 class MainWindow(object):
-    def __init__(self):
-        self.height = Main.height
-        self.width = Main.width
+    def __init__(self,height,width):
+        self.height = height
+        self.width = width
         self.label = []
         self.button = []
-        self.mainheight = 25 * self.height + 40
-        self.mainwidth = 25 * self.width + 150
+        self.mainheight = (25 * self.height) + 120
+        self.mainwidth = (25 * self.width) + 40
         self.checkbomb = []
         for i in range(self.height):
             self.checkbomb.append([])
@@ -122,7 +127,7 @@ class MainWindow(object):
                         bombs += 1
                     if j+1 < self.width and self.checkbomb[i][j+1] == "bomb":
                         bombs += 1
-                    if i+1 < self.width:
+                    if i+1 < self.height:
                         if j-1 >= 0 and self.checkbomb[i+1][j-1] == "bomb":
                             bombs += 1
                         if self.checkbomb[i+1][j] == "bomb":
@@ -133,7 +138,7 @@ class MainWindow(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(self.mainheight, self.mainwidth)
+        MainWindow.resize(self.mainwidth,self.mainheight)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         for i in range(self.height):
@@ -361,10 +366,8 @@ if __name__ == "__main__":
     GameWindow = QtWidgets.QMainWindow()
     Winwindow = QtWidgets.QMainWindow()
     ui = Main()
-    game = MainWindow()
     winable = WonWindow()
     ui.setupUi(thisMainWindow)
-    game.setupUi(GameWindow)
     winable.setupUi(Winwindow)
     thisMainWindow.show()
     sys.exit(app.exec_())
