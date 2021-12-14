@@ -7,6 +7,7 @@ class Main(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(360, 360)
+        MainWindow.setWindowIcon(QtGui.QIcon('bomb.png'))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -94,7 +95,7 @@ class Main(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Minesweeper"))
         self.pushButton.setText(_translate("MainWindow", "Play now"))
         self.label.setText(_translate("MainWindow", "Height"))
         self.label_2.setText(_translate("MainWindow", "Width"))
@@ -114,6 +115,7 @@ class MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(self.mainwidth,self.mainheight)
+        MainWindow.setWindowIcon(QtGui.QIcon('bomb.png'))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         for m in range(self.height):
@@ -330,6 +332,7 @@ class WonWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(300, 350)
+        MainWindow.setWindowIcon(QtGui.QIcon('bomb.png'))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         font = QtGui.QFont()
@@ -379,7 +382,7 @@ class WonWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Minesweeper"))
         self.label_2.setText(_translate("MainWindow", "Congratulation! \n","You won"))
         self.label_3.setText(_translate("MainWindow", self.time + " seconds"))
         
