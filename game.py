@@ -220,7 +220,7 @@ class MainWindow(object):
                         self.checkbomb[x].append(".")
                     else:
                         chance = random.randint(0, 100)
-                        if chance < 20:
+                        if chance < 25:
                             self.checkbomb[x].append("bomb")
                         else:
                             self.checkbomb[x].append(".")
@@ -340,7 +340,7 @@ class WonWindow(object):
         font.setPointSize(16)
         font.setBold(True)
         font.setWeight(75)
-        self.movie = QMovie("source.gif")
+        self.movie = QMovie("hooray.gif")
         self.movie.start()
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(75, 20, 150, 150))
