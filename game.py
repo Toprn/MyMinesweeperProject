@@ -220,7 +220,7 @@ class MainWindow(object):
                         self.checkbomb[x].append(".")
                     else:
                         chance = random.randint(0, 100)
-                        if chance < 25:
+                        if chance < 20:
                             self.checkbomb[x].append("bomb")
                         else:
                             self.checkbomb[x].append(".")
