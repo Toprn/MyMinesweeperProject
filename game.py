@@ -91,7 +91,7 @@ class Main(object):
                     thisMainWindow.hide()
                     GameWindow.show()
         except:
-            self.label_3.setText("Please enter a\nheight and width\nin range of 10-50")
+            self.label_3.setText("Please enter a\nheight and width\nin range of 10-30")
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
