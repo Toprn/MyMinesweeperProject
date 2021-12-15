@@ -139,7 +139,7 @@ class MainWindow(object):
                 self.button[m][n].setObjectName("button"+str(m)+"_"+str(n))
                 self.button[m][n].clicked.connect(lambda checked, arg1 = m, arg2=n: self.pressed(arg1,arg2))
                 x += 25
-                z+=1
+                z += 1
             y += 25
         self.Timertext = QtWidgets.QLabel(self.centralwidget)
         self.Timertext.setGeometry(QtCore.QRect(30, 25, 160, 50))
