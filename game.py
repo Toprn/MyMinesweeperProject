@@ -99,7 +99,7 @@ class Main(object):
         self.pushButton.setText(_translate("MainWindow", "Play now"))
         self.label.setText(_translate("MainWindow", "Height"))
         self.label_2.setText(_translate("MainWindow", "Width"))
-        self.label_3.setText(_translate("MainWindow", "Please enter a\nheight and width\nin range of 10-50"))
+        self.label_3.setText(_translate("MainWindow", "Please enter a\nheight and width\nin range of 10-30"))
 
 class MainWindow(object):
     def __init__(self,height,width):
@@ -220,7 +220,7 @@ class MainWindow(object):
                         self.checkbomb[x].append(".")
                     else:
                         chance = random.randint(0, 100)
-                        if chance < 20:
+                        if chance < 10:
                             self.checkbomb[x].append("bomb")
                         else:
                             self.checkbomb[x].append(".")
@@ -280,7 +280,7 @@ class MainWindow(object):
                     break
         if win:
             self.flag = False
-            winable = WonWindow(self.timenow)
+            winable = WonWindow(self.timenow,self.height,self.width)
             winable.setupUi(Winwindow)
             GameWindow.hide()
             Winwindow.show()
@@ -326,8 +326,10 @@ class MainWindow(object):
         self.resetButton.setText(_translate("MainWindow", "Reset"))
 
 class WonWindow(object):
-    def __init__(self,time):
+    def __init__(self,time,height,width):
         self.time = str(time)
+        self.height = height
+        self.width = width
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -384,7 +386,7 @@ class WonWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Minesweeper"))
         self.label_2.setText(_translate("MainWindow", "Congratulation! \n","You won"))
-        self.label_3.setText(_translate("MainWindow", self.time + " seconds"))
+        self.label_3.setText(_translate("MainWindow", self.time + " seconds\n" + "in " + self.height + " height and " + self.width + "width"))
         
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
