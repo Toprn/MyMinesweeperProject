@@ -220,7 +220,7 @@ class MainWindow(object):
                         self.checkbomb[x].append(".")
                     else:
                         chance = random.randint(0, 100)
-                        if chance < 10:
+                        if chance < 15:
                             self.checkbomb[x].append("bomb")
                         else:
                             self.checkbomb[x].append(".")
@@ -328,8 +328,8 @@ class MainWindow(object):
 class WonWindow(object):
     def __init__(self,time,height,width):
         self.time = str(time)
-        self.height = height
-        self.width = width
+        self.height = str(height)
+        self.width = str(width)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -361,7 +361,7 @@ class WonWindow(object):
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(120, 270, 171, 31))
+        self.label_3.setGeometry(QtCore.QRect(-10, 270, 300, 60))
         font = QtGui.QFont()
         font.setFamily("MS PGothic")
         font.setPointSize(18)
@@ -386,7 +386,7 @@ class WonWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Minesweeper"))
         self.label_2.setText(_translate("MainWindow", "Congratulation! \n","You won"))
-        self.label_3.setText(_translate("MainWindow", self.time + " seconds\n" + "in " + self.height + " height and " + self.width + "width"))
+        self.label_3.setText(_translate("MainWindow", self.time + " seconds\n" + "In " + self.height + " height and " + self.width + " width"))
         
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
