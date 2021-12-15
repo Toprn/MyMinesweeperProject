@@ -78,14 +78,14 @@ class Main(object):
 
     def pressed(self,height,width):
         try:
-            if int(height) not in range(10,51) and int(width) not in range(10,51):
-                self.label_3.setText("Please enter a\nheight and width\nin range of 10-50")
-            elif int(height) not in range(10,51):
-                self.label_3.setText("Please enter a height\nby number 10-50")
-            elif int(width) not in range(10,51):
-                self.label_3.setText("Please enter a width\nby number 10-50")
-            elif int(height) in range(10,51):
-                if int(width) in range(10,51):
+            if int(height) not in range(10,31) and int(width) not in range(10,31):
+                self.label_3.setText("Please enter a\nheight and width\nin range of 10-30")
+            elif int(height) not in range(10,31):
+                self.label_3.setText("Please enter a height\nby number 10-30")
+            elif int(width) not in range(10,31):
+                self.label_3.setText("Please enter a width\nby number 10-30")
+            elif int(height) in range(10,31):
+                if int(width) in range(10,31):
                     game = MainWindow(int(height),int(width))
                     game.setupUi(GameWindow)
                     thisMainWindow.hide()
