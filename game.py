@@ -149,9 +149,9 @@ class MainWindow(object):
         self.Timertext.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Timertext.setAlignment(QtCore.Qt.AlignLeft)
         self.Timertext.setObjectName("Timer")
-        self.Timertext.setText("0.0")
-        self.count = 0
-        self.flag = False
+        self.Timertext.setText("5.0")
+        self.count = 50
+        self.time = False
         self.Timer = QTimer(self.centralwidget)
         self.Timer.timeout.connect(self.showTime)
         self.Timer.start(100)
@@ -182,10 +182,17 @@ class MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def showTime(self):
-        if self.flag == True:
-            self.count += 1
+        if self.time == True:
+            self.count -= 1
             self.timenow = self.count / 10
             self.Timertext.setText(str(self.timenow))
+            if self.count == 0:
+                self.time = False
+                self.Timertext.setText("You lost")
+                for o in range(self.height):
+                    for p in range(self.width):
+                        self.button[o][p].setEnabled(False)
+
 
     def checkbombs(self,m,n):
         if self.checkbomb[m][n] == 0:
@@ -211,8 +218,9 @@ class MainWindow(object):
 
     def pressed(self,m,n):
         self.button[m][n].hide()
+        self.count = 50
         if self.checkbomb == []:
-            self.flag = True
+            self.time = True
             for x in range(self.height):
                 self.checkbomb.append([])
                 for y in range(self.width):
@@ -220,7 +228,7 @@ class MainWindow(object):
                         self.checkbomb[x].append(".")
                     else:
                         chance = random.randint(0, 100)
-                        if chance < 15:
+                        if chance < 5:
                             self.checkbomb[x].append("bomb")
                         else:
                             self.checkbomb[x].append(".")
@@ -249,7 +257,7 @@ class MainWindow(object):
                         self.checkbomb[x][y] = bombs
         if self.checkbomb[m][n] == "bomb":
             self.checkbombs(m,n)
-            self.flag = False
+            self.time = False
             self.Timertext.setText("You lost")
             font = QtGui.QFont()
             font.setPointSize(25)
@@ -279,8 +287,8 @@ class MainWindow(object):
                     win = False
                     break
         if win:
-            self.flag = False
-            winable = WonWindow(self.timenow,self.height,self.width)
+            self.time = False
+            winable = WonWindow(self.height,self.width)
             winable.setupUi(Winwindow)
             GameWindow.hide()
             Winwindow.show()
@@ -316,9 +324,9 @@ class MainWindow(object):
                 self.button[i][j].show()
                 self.button[i][j].setEnabled(True)
         self.checkbomb = []
-        self.flag = False
-        self.count = 0
-        self.Timertext.setText("0.0")
+        self.time = False
+        self.count = 50
+        self.Timertext.setText("5.0")
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -326,8 +334,7 @@ class MainWindow(object):
         self.resetButton.setText(_translate("MainWindow", "Reset"))
 
 class WonWindow(object):
-    def __init__(self,time,height,width):
-        self.time = str(time)
+    def __init__(self,height,width):
         self.height = str(height)
         self.width = str(width)
 
@@ -361,14 +368,14 @@ class WonWindow(object):
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(-10, 270, 300, 60))
+        self.label_3.setGeometry(QtCore.QRect(0, 270, 300, 60))
         font = QtGui.QFont()
         font.setFamily("MS PGothic")
-        font.setPointSize(18)
+        font.setPointSize(16)
         font.setBold(True)
         font.setWeight(75)
         self.label_3.setFont(font)
-        self.label_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -386,7 +393,7 @@ class WonWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Minesweeper"))
         self.label_2.setText(_translate("MainWindow", "Congratulation! \n","You won"))
-        self.label_3.setText(_translate("MainWindow", self.time + " seconds\n" + "In " + self.height + " height and " + self.width + " width"))
+        self.label_3.setText(_translate("MainWindow", "With " + self.height + " height and " + self.width + " width"))
         
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
